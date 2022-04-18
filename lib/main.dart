@@ -80,6 +80,57 @@ class _MyHomePageState extends State<MyHomePage> {
             : null,
       );
 
+  Widget listItem(
+          {String title = 'Title',
+          String subTitle = '',
+          bool isActive = false}) =>
+      (Container(
+        margin: isActive ? const EdgeInsets.all(10) : null,
+        padding: isActive
+            ? const EdgeInsets.symmetric(vertical: 20, horizontal: 0)
+            : null,
+        decoration: isActive
+            ? BoxDecoration(
+                color: Config.primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
+              )
+            : null,
+        child: ListTile(
+          contentPadding: isActive
+              ? const EdgeInsets.symmetric(vertical: 0, horizontal: 10)
+              : null,
+          textColor: isActive ? Colors.white : Colors.black,
+          title: Text(title),
+          subtitle: Text(
+            subTitle,
+            style: const TextStyle(color: Color.fromARGB(255, 194, 194, 194)),
+          ),
+          trailing: !isActive
+              ? RotatedBox(
+                  quarterTurns: 0,
+                  child: Icon(Icons.keyboard_arrow_down,
+                      color: isActive ? Colors.white : Colors.black),
+                )
+              : null,
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(14.0),
+            child: Container(
+              width: 60.0,
+              height: 60.0,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(141, 237, 156, 250),
+                  Color.fromARGB(255, 200, 21, 220),
+                ],
+                begin: FractionalOffset(0.0, 0.0),
+                end: FractionalOffset(1.0, 1.0),
+              )),
+            ),
+          ),
+        ),
+      ));
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -125,6 +176,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+            listItem(title: 'Create Your Accout'),
+            listItem(
+                title: 'Link Your Cards',
+                subTitle: 'Hello world',
+                isActive: true)
           ],
         ),
       ),
